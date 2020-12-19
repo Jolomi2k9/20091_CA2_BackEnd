@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import the Link component to use for linking prop information
 import { Link } from 'react-router-dom';
-
+//
 // define one single Game card component
 class Game extends React.Component {
   render() {
