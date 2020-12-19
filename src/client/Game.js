@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 //import the Link component to use for linking prop information
 import { Link } from 'react-router-dom';
 
-// define one single user card component
-class User extends React.Component {
+// define one single Game card component
+class Game extends React.Component {
   render() {
     return (
       <div className="column is-2" style={{ padding: "20px" }}>
@@ -24,8 +24,8 @@ class User extends React.Component {
                 <button className="button is-danger" type="button" onClick={() => {this.props.handleDelete(this.props.id);}}>
                   Delete
                 </button>
-                {/*load the EditUser component via React Router and send the id over to the EditUser component*/}
-                <Link to={`/edit-user/${this.props.id}`}>
+                {/*load the EditGame component via React Router and send the id over to the EditGame component*/}
+                <Link to={`/edit-games/${this.props.id}`}>
                   <button className="button is-primary" type="button">
                   Edit
                   </button>
@@ -39,4 +39,4 @@ class User extends React.Component {
   }
 }
 
-export default User;
+export default Game;

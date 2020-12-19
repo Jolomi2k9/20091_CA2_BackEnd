@@ -5,17 +5,17 @@ import { Link } from 'react-router-dom';
 // Use "npm install axios" command to install
 import axios from 'axios';
 
-//Create User component that will create a new user card
-class CreateUser extends Component {
+//Create Game component that will create a new Game card
+class CreateGame extends Component {
     constructor(props) {
         super(props);
         // the form fields are stored in a state
         this.state = { 
             title: '', 
-            first: '', 
-            lastName: '', 
-            quote: '', 
-            picture: '' 
+            platform: '', 
+            developer: '', 
+            year: '', 
+            publisher: '' 
         };
 
         //this binding is necessary to make `this` work in the callback
@@ -37,8 +37,8 @@ class CreateUser extends Component {
         //preventDefault() is called on the event when it occurs to prevent a browser reload/refresh
         event.preventDefault();
 
-        //use axios to send a POST request to the server which includes the state information for the new user to be created
-        axios.post('/api/users', this.state)
+        //use axios to send a POST request to the server which includes the state information for the new Game to be created
+        axios.post('/api/games', this.state)
             //on success go to home
             .then(res => this.props.history.push('/'))
             .catch(error => {
@@ -52,7 +52,7 @@ class CreateUser extends Component {
             <div className="is-fluid">
                 {/*on form submit call handleSubmit()*/}
                 <form onSubmit={this.handleSubmit}>
-                    <h2 className="title is-1 has-text-primary">Create New User</h2>
+                    <h2 className="title is-1 has-text-primary">Create New Game</h2>
                     <hr />
                     {/*main container for input fields*/}
                     <div className="container">
@@ -66,30 +66,30 @@ class CreateUser extends Component {
                                 </div>
                             </div>
                             <div className="field">
-                                <label className="label"> First Name: </label>
+                                <label className="label"> Platform: </label>
                                 <div className="control">
-                                    <input className="input is-small" type="text" name="first" value={this.state.first} onChange={this.handleChange} id="form" />
+                                    <input className="input is-small" type="text" name="platform" value={this.state.platform} onChange={this.handleChange} id="form" />
                                 </div>
                             </div>
                              <div className="field">
-                                <label className="label"> Picture: </label>
+                                <label className="label"> Publisher: </label>
                                 <div className="control">
-                                    <input className="input is-small" type="text" name="picture" value={this.state.picture} onChange={this.handleChange} id="form" />
+                                    <input className="input is-small" type="text" name="publisher" value={this.state.publisher} onChange={this.handleChange} id="form" />
                                 </div>
                             </div>
                         </div>
                         {/*SECOND COLUMN*/}
                         <div className="column">
                             <div className="field">
-                                <label className="label"> Last Name: </label>
+                                <label className="label"> Developer: </label>
                                 <div className="control">
-                                    <input className="input is-small" type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} id="form" />
+                                    <input className="input is-small" type="text" name="developer" value={this.state.developer} onChange={this.handleChange} id="form" />
                                 </div>
                             </div>
                             <div className="field">
-                                <label className="label"> Quote: </label>
+                                <label className="label"> Year: </label>
                                 <div className="control">
-                                    <input className="input is-small" type="text" name="quote" value={this.state.quote} onChange={this.handleChange} id="form" />
+                                    <input className="input is-small" type="text" name="year" value={this.state.year} onChange={this.handleChange} id="form" />
                                 </div>
                             </div>
                         </div>
@@ -103,4 +103,4 @@ class CreateUser extends Component {
     }
 }
 
-export default CreateUser;
+export default CreateGame;

@@ -5,13 +5,15 @@ const bodyParser = require('body-parser');
 
 const server = express();
 // the value for dbname should match your database name
-const dbname = 'usersdb';
+const dbname = 'videoGamesdb';
 
 // serve files from the dist directory
 server.use(express.static('dist'));
 
 // the URL to the DB will be loaded from an env variable or using the MongoDB Clour
-const dbroute = process.env.MONGODB_URL || `mongodb+srv://erika:dorset@users-bm6td.mongodb.net/test?retryWrites=true&w=majority`;
+//const dbroute = process.env.MONGODB_URL || `mongodb+srv://erika:dorset@users-bm6td.mongodb.net/test?retryWrites=true&w=majority`;
+const dbroute = process.env.MONGODB_URL || `mongodb+srv://userAD:admin@cluster0.l2oep.mongodb.net/<dbname>?retryWrites=true&w=majority`;
+
 
 let db;
 
@@ -30,9 +32,9 @@ server.use(bodyParser.json());
 
 // DEFINE ENDPOINTS
 
-// retrieve all user objects from DB
-server.get('/api/users', (req, res) => {
-  db.collection('users').find().toArray((err, result) => {
+// retrieve all games objects from DB
+server.get('/api/games', (req, res) => {
+  db.collection('games').find().toArray((err, result) => {
     if (err) throw err;
 
     console.log(result);
@@ -40,9 +42,9 @@ server.get('/api/users', (req, res) => {
   });
 });
 
-// retrieve user with specific ID from DB
-server.get('/api/users/:id', (req, res) => {
-  db.collection('users').findOne({_id: new ObjectID(req.params.id) }, (err, result) => {
+// retrieve games with specific ID from DB
+server.get('/api/games/:id', (req, res) => {
+  db.collection('games').findOne({_id: new ObjectID(req.params.id) }, (err, result) => {
     if (err) throw err;
 
     console.log(result);
@@ -50,9 +52,9 @@ server.get('/api/users/:id', (req, res) => {
   });
 });
 
-// delete user with specific ID from DB
-server.delete('/api/users', (req, res) => {
-  db.collection('users').deleteOne( {_id: new ObjectID(req.body.id) }, err => {
+// delete games with specific ID from DB
+server.delete('/api/games', (req, res) => {
+  db.collection('games').deleteOne( {_id: new ObjectID(req.body.id) }, err => {
     if (err) return res.send(err);
 
     console.log('deleted from database');
@@ -60,9 +62,9 @@ server.delete('/api/users', (req, res) => {
   });
 });
 
-// create new user based on info supplied in request body
-server.post('/api/users', (req, res) => {
-  db.collection('users').insertOne(req.body, (err, result) => {
+// create new games based on info supplied in request body
+server.post('/api/games', (req, res) => {
+  db.collection('games').insertOne(req.body, (err, result) => {
     if (err) throw err;
 
     console.log('created in database');
@@ -70,14 +72,14 @@ server.post('/api/users', (req, res) => {
   });
 });
 
-// update user based on info supplied in request body
-server.put('/api/users', (req, res) => {
-  // get the ID of the user to be updated
+// update games based on info supplied in request body
+server.put('/api/games', (req, res) => {
+  // get the ID of the games to be updated
   const id  = req.body._id;
   // remove the ID so as not to overwrite it when updating
   delete req.body._id;
-  // find a user matching this ID and update their details
-  db.collection('users').updateOne( {_id: new ObjectID(id) }, {$set: req.body}, (err, result) => {
+  // find a games matching this ID and update their details
+  db.collection('games').updateOne( {_id: new ObjectID(id) }, {$set: req.body}, (err, result) => {
     if (err) throw err;
 
     console.log('updated in database');
